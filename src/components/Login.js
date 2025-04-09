@@ -1,4 +1,3 @@
-// src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -24,16 +23,23 @@ function Login() {
           'Content-Type': 'application/json'
         }
       });
-      console.log('Login response:', response.data); // Debug response
-      if (response.data.token) {
+
+      // Check if the request was successful (status 200) and contains a token
+      if (response.status === 200 && response.data.token) {
+        console.log('Login successful, token:', response.data.token); // Debug
         localStorage.setItem('token', response.data.token);
         navigate('/users');
       } else {
-        throw new Error('No token received');
+        throw new Error('Invalid login response');
       }
     } catch (err) {
       console.error('Login error:', err.response ? err.response.data : err.message);
-      setError('Invalid credentials or network error. Please try again.');
+      // Handle specific error cases from ReqRes
+      if (err.response && err.response.status === 400) {
+        setError('Invalid email or password. Please try again.');
+      } else {
+        setError('Network error or server issue. Please try again later.');
+      }
       setTimeout(() => setError(''), 2000);
     } finally {
       setLoading(false);
@@ -56,7 +62,6 @@ function Login() {
               type="email"
               id="email"
               className={styles.input}
-              placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -69,7 +74,6 @@ function Login() {
               type="password"
               id="password"
               className={styles.input}
-              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
