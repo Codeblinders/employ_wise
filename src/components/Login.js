@@ -1,3 +1,4 @@
+// src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +11,23 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  const VALID_CREDENTIALS = {
+    email: 'eve.holt@reqres.in',
+    password: 'cityslicka'
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(''); // Clear previous errors
+
+    // Pre-check credentials (optional fallback)
+    if (email !== VALID_CREDENTIALS.email || password !== VALID_CREDENTIALS.password) {
+      setError('Please use the correct credentials: eve.holt@reqres.in / cityslicka');
+      setLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post('https://reqres.in/api/login', {
         email,
@@ -21,22 +35,22 @@ function Login() {
       }, {
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        timeout: 5000 // 5-second timeout
       });
 
-      // Check if the request was successful (status 200) and contains a token
+      // Validate successful response
       if (response.status === 200 && response.data.token) {
         console.log('Login successful, token:', response.data.token); // Debug
         localStorage.setItem('token', response.data.token);
         navigate('/users');
       } else {
-        throw new Error('Invalid login response');
+        throw new Error('Invalid login response from server');
       }
     } catch (err) {
       console.error('Login error:', err.response ? err.response.data : err.message);
-      // Handle specific error cases from ReqRes
       if (err.response && err.response.status === 400) {
-        setError('Invalid email or password. Please try again.');
+        setError('Invalid email or password. Please use: eve.holt@reqres.in / cityslicka');
       } else {
         setError('Network error or server issue. Please try again later.');
       }
