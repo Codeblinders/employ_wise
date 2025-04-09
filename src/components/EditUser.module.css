@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #060f36, #11162c, #290336);
+  background-size: 100% 100%;
+  animation: gradientBG 10s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+:root {
+  --color-primary: #6366f1;
+  --color-secondary: #ec4899;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --blur: blur(16px);
+  --radius: 1.5rem;
+  --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  --transition: all 0.35s ease;
+}
+
+.container {
+  margin-top: 250px;
+  max-width: 740px;
+  margin: 4rem auto;
+  padding: 2.5rem;
+  background: var(--glass-bg);
+  border-radius: var(--radius);
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+  animation: fadeIn 0.8s ease-in-out;
+  transition: var(--transition);
+}
+
+.container:hover {
+  background: rgba(20, 30, 70, 0.5);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.alert {
+  width: 100%;
+  padding: 1.1rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 1rem;
+  animation: slideDown 0.5s ease;
+  margin-bottom: 1.5rem;
+}
+
+.success {
+  background: linear-gradient(to right, #6ee7b7, #10b981);
+  color: white;
+}
+
+.error {
+  background: linear-gradient(to right, #f87171, #ef4444);
+  color: white;
+}
+
+.form {
+  width: 100%;
+  max-width: 600px;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.25rem;
+  backdrop-filter: var(--blur);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow);
+  animation: floatIn 0.7s ease;
+  transition: var(--transition);
+}
+
+.form:hover {
+  transform: scale(1.01);
+}
+
+.formGroup {
+  margin-bottom: 1.6rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e5e7eb;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: var(--transition);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  background: #fff;
+  outline: none;
+  transform: scale(1.015);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.25);
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.submitBtn,
+.cancelBtn {
+  padding: 0.85rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: white;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: var(--transition);
+}
+
+.submitBtn {
+  background: linear-gradient(to right, #34d399, #059669);
+}
+
+.cancelBtn {
+  background: linear-gradient(to right, #94a3b8, #64748b);
+}
+
+.submitBtn::after,
+.cancelBtn::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+  z-index: -1;
+}
+
+.submitBtn:hover::after,
+.cancelBtn:hover::after {
+  width: 200%;
+  height: 200%;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 2rem 1.2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .form {
+    padding: 2rem;
+    max-width: 100%;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .submitBtn,
+  .cancelBtn {
+    width: 100%;
+  }
+}
