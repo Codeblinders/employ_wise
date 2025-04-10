@@ -1,6 +1,9 @@
 deployed here 
 https://employ-wise.onrender.com
 
+## it may take some time to open this site 
+## !! try refreshing the page 2 to 3 times
+
 # EmployWise Assignment - User Management Application
 
 This is a React-based user management application that integrates with the ReqRes API to handle authentication, user listing, editing, and deletion. The project follows the assignment guidelines and includes bonus features such as client-side search and React Router navigation.
@@ -89,3 +92,14 @@ To host the application on a free service (e.g., Netlify):
    ```bash
    npm run build
    ```
+## Login Page
+![image](https://github.com/user-attachments/assets/2ccadb1d-1cee-40e9-9b7b-eba553e021bd)
+
+## User Page
+![image](https://github.com/user-attachments/assets/3aa15d39-6484-4490-bc7e-8cfac5c0d634)
+
+## EditUser Page
+![image](https://github.com/user-attachments/assets/c6198a0b-fc1e-4c7d-b6bc-659728c98f2f)
+
+
+
